@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
-const jwt = require('jsonwebtoken');
-const validateEmail = require('../utils/validate-email');
+import mongoose from 'mongoose';
+import jwt from 'jsonwebtoken';
+import validateEmail from '../utils/validate-email.js';
 
 const userSchema = new mongoose.Schema(
   {
@@ -33,4 +33,4 @@ userSchema.methods.generateToken = function () {
   );
 };
 
-module.exports = mongoose.model('User', userSchema);
+export default mongoose.model('User', userSchema);

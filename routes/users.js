@@ -1,21 +1,24 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
+import {
+  createUser,
+  loginUser,
+  readUsers,
+  readUser,
+  updateUser,
+  deleteUser,
+  changeOwnPassword,
+} from '../controllers/users.js';
+import adminonly from '../middleware/adminonly.js';
+import authorize from '../middleware/authorize.js';
 
-const usersController = require('../controllers/users');
-const adminonly = require('../middleware/adminonly');
-const authorize = require('../middleware/authorize');
+router.post('/', createUser); // Create an initial admin, then comment out and use the next line
+// router.post('/', adminonly, createUser);
+router.post('/login', loginUser);
+router.get('/', adminonly, readUsers);
+router.get('/:id', adminonly, readUser);
+router.patch('/:id', adminonly, updateUser);
+router.delete('/:id', adminonly, deleteUser);
+router.patch('/changeownpassword/:id', authorize, changeOwnPassword);
 
-router.post('/', usersController.createUser); // Create an initial admin, then comment out and use the next line
-// router.post('/', adminonly, usersController.createUser);
-router.post('/login', usersController.loginUser);
-router.get('/', adminonly, usersController.readUsers);
-router.get('/:id', adminonly, usersController.readUser);
-router.patch('/:id', adminonly, usersController.updateUser);
-router.delete('/:id', adminonly, usersController.deleteUser);
-router.patch(
-  '/changeownpassword/:id',
-  authorize,
-  usersController.changeOwnPassword
-);
-
-module.exports = router;
+export default router;

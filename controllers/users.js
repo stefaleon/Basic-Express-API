@@ -1,10 +1,10 @@
-const bcrypt = require('bcryptjs');
+import bcrypt from 'bcryptjs';
 
-const User = require('../models/user');
-const validateEmail = require('../utils/validate-email');
-const defineUserSearchQuery = require('../utils/define-user-search-query');
+import User from '../models/user.js';
+import validateEmail from '../utils/validate-email.js';
+import defineUserSearchQuery from '../utils/define-user-search-query.js';
 
-exports.createUser = async (req, res, next) => {
+export const createUser = async (req, res, next) => {
   try {
     /*
     Enable this in order to allow admin creation only by admins
@@ -49,7 +49,7 @@ exports.createUser = async (req, res, next) => {
   }
 };
 
-exports.loginUser = async (req, res, next) => {
+export const loginUser = async (req, res, next) => {
   try {
     if (!req.body.email || !validateEmail(req.body.email.trim())) {
       return res.status(400).json({ error: 'Please enter the user email' });
@@ -76,7 +76,7 @@ exports.loginUser = async (req, res, next) => {
   }
 };
 
-exports.readUsers = async (req, res, next) => {
+export const readUsers = async (req, res, next) => {
   try {
     const searchQuery = defineUserSearchQuery(req);
     const users = await User.find(searchQuery)
@@ -88,7 +88,7 @@ exports.readUsers = async (req, res, next) => {
   }
 };
 
-exports.readUser = async (req, res, next) => {
+export const readUser = async (req, res, next) => {
   try {
     const user = await User.findById(req.params.id).select('-password');
 
@@ -102,7 +102,7 @@ exports.readUser = async (req, res, next) => {
   }
 };
 
-exports.updateUser = async (req, res, next) => {
+export const updateUser = async (req, res, next) => {
   try {
     const user = await User.findById(req.params.id).select('-password');
 
@@ -138,7 +138,7 @@ exports.updateUser = async (req, res, next) => {
   }
 };
 
-exports.deleteUser = async (req, res, next) => {
+export const deleteUser = async (req, res, next) => {
   try {
     const user = await User.findById(req.params.id);
     if (!user) {
@@ -151,7 +151,7 @@ exports.deleteUser = async (req, res, next) => {
   }
 };
 
-exports.changeOwnPassword = async (req, res, next) => {
+export const changeOwnPassword = async (req, res, next) => {
   try {
     if (req.user._id.toString() !== req.params.id.toString()) {
       return res

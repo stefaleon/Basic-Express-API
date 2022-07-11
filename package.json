@@ -1,4 +1,5 @@
 {
+  "type": "module",
   "name": "basic-express-api",
   "version": "1.0.0",
   "description": "",

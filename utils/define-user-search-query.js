@@ -9,4 +9,4 @@ const defineUserSearchQuery = (req) => {
     : {};
 };
 
-module.exports = defineUserSearchQuery;
+export default defineUserSearchQuery;

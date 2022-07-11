@@ -1,11 +1,12 @@
-const path = require('path');
-const express = require('express');
+// import * as path from 'path';
+import express from 'express';
 
-const connect = require('./connect');
+import connect from './connect.js';
 
-require('dotenv').config();
+import dotenv from 'dotenv';
+dotenv.config();
 
-const usersRoutes = require('./routes/users');
+import usersRoutes from './routes/users.js';
 
 const app = express();
 
