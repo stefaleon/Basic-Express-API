@@ -2,4 +2,4 @@
 
 - A REST API with user auth
 - As implemented for the [Asset Manager](https://www.udemy.com/course/mern-stack-made-simple/) project
-- Updated to lates package versions - July 9th 2022
+- Updated to the latest package versions - July 28th 2022
