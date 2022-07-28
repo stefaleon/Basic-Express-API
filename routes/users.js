@@ -8,6 +8,7 @@ import {
   updateUser,
   deleteUser,
   changeOwnPassword,
+  me,
 } from '../controllers/users.js';
 import adminonly from '../middleware/adminonly.js';
 import authorize from '../middleware/authorize.js';
@@ -15,6 +16,7 @@ import authorize from '../middleware/authorize.js';
 router.post('/', createUser); // Create an initial admin, then comment out and use the next line
 // router.post('/', adminonly, createUser);
 router.post('/login', loginUser);
+router.get('/me', authorize, me);
 router.get('/', adminonly, readUsers);
 router.get('/:id', adminonly, readUser);
 router.patch('/:id', adminonly, updateUser);

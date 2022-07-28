@@ -88,6 +88,14 @@ export const loginUser = async (req, res, next) => {
   }
 };
 
+export const me = async (req, res, next) => {
+  try {
+    res.status(200).json({ user: req.user });
+  } catch (err) {
+    next(err);
+  }
+};
+
 export const readUsers = async (req, res, next) => {
   try {
     const searchQuery = defineUserSearchQuery(req);
