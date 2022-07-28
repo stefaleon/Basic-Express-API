@@ -43,7 +43,13 @@ export const createUser = async (req, res, next) => {
       ...req.body,
       password: hashedPassword,
     }).save();
-    res.status(200).json({ token: user.generateToken() });
+    res.status(200).json({
+      token: user.generateToken(),
+      user: {
+        name: user.name,
+        email: user.email,
+      },
+    });
   } catch (err) {
     next(err);
   }
@@ -70,7 +76,13 @@ export const loginUser = async (req, res, next) => {
       return res.status(400).json({ error: 'Wrong Credentials' });
     }
 
-    res.status(200).json({ token: user.generateToken() });
+    res.status(200).json({
+      token: user.generateToken(),
+      user: {
+        name: user.name,
+        email: user.email,
+      },
+    });
   } catch (err) {
     next(err);
   }
